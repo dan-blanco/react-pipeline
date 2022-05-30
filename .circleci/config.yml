@@ -41,7 +41,7 @@ jobs:
             cd code
             npm install
             npm run build
-  creat-ecr-image:
+  create-ecr-image:
     executor: aws-cli/default
     steps:
       - checkout
@@ -69,3 +69,6 @@ workflows:
       - build-react-app:
           requires: 
             - create-react-app-if-none
+      - create-ecr-image:
+          requires:
+            - build-react-app
