@@ -34,7 +34,7 @@ jobs:
   build-react-app:
     executor: node-executor
     steps:
-      -checkout
+      - checkout
       - run:
           name: build react code
           command: |
@@ -43,6 +43,8 @@ jobs:
             npm run build
   creat-ecr-image:
     executor: aws-cli/default
+    steps:
+      - checkout
       - run:
           name: Authenticate Docker Client
           command: |
@@ -65,4 +67,5 @@ workflows:
     jobs:
       - create-react-app-if-none
       - build-react-app:
-        requires: create-react-app-if-none
+          requires: 
+            - create-react-app-if-none
