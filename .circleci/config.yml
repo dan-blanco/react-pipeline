@@ -49,7 +49,7 @@ jobs:
             - code/build     
       
   create-ecr-image:
-    executor: aws-cli
+    executor: aws-cli/default
     steps:
       - checkout
       - aws-cli/setup:
