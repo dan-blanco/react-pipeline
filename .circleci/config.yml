@@ -49,8 +49,7 @@ jobs:
             - code/build     
       
   create-ecr-image:
-    docker:
-     - image: docker
+    executor: aws-cli
     steps:
       - checkout
       - aws-cli/setup:
