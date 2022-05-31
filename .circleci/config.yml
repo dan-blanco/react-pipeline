@@ -3,8 +3,8 @@
 version: 2.1
 
 orbs:
-  aws-cli: circleci/aws-cli@3.1
-  #aws-ecr: circleci/aws-ecr@x.y.z
+  #aws-cli: circleci/aws-cli@3.1
+  aws-ecr: circleci/aws-ecr@1.0.1
 
 executors:
   node-executor:
@@ -69,12 +69,21 @@ jobs:
       - run:
           name: push-image-to-ecr
           command: |
-            docker push 338101346306.dkr.ecr.us-west-1.amazonaws.com/nginx-blanco-schemes:latest    
+            docker push 338101346306.dkr.ecr.us-west-1.amazonaws.com/nginx-blanco-schemes:latest 
 
 workflows:
   react-node-workflow: 
     jobs:
       - create-react-app-if-none
-      - create-ecr-image:
-          requires:
-            - create-react-app-if-none
+      - aws-ecr/build-and-push-image:
+          account-url: 338101346306.dkr.ecr.us-west-1.amazonaws.com
+          aws-access-key-id: AKIAU5ODJEABKU2EW2I7
+          aws-secret-access-key: 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
+          context: myContext
+          create-repo: true
+          dockerfile: Dockerfile
+          path: Dockerfile
+          profile-name: danblanco
+          region: us-west-1
+          repo: nginx-blanco-schemes
+          tag: 'latest'
