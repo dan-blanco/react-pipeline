@@ -35,10 +35,6 @@ jobs:
             else
               echo "app already exists"
             fi
-  build-react-app:
-    executor: node-executor
-    steps:
-      - checkout
       - run:
           name: build react code
           command: |
@@ -46,6 +42,11 @@ jobs:
             cd code
             npm install
             npm run build
+      - persist_to_workspace:
+          root: workspace
+          paths:
+            - react-app     
+      
   create-ecr-image:
     executor: aws-cli/default
     steps:
