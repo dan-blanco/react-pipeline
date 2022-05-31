@@ -12,7 +12,7 @@ executors:
         #auth:
           #username: mydockerhub-user
           #password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    working_directory: /tmp
+    working_directory: /react-app
     
 
 # Define a job to be invoked later in a workflow.
@@ -43,9 +43,9 @@ jobs:
             npm install
             npm run build
       - persist_to_workspace:
-          root: root
+          root: react-app
           paths:
-            - react-app     
+            - code/build     
       
   create-ecr-image:
     executor: aws-cli/default
