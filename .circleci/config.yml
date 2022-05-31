@@ -25,6 +25,9 @@ jobs:
       - run:
           name: looking for react project named "code"
           command: |
+            if [ ! -d "react-app" ]; then # if dir not exists...
+              mkdir react-app
+            fi
             cd react-app
             if [ ! -d "code" ]; then # if dir not exists...
               npx create-react-app code
