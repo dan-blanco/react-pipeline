@@ -56,8 +56,8 @@ jobs:
           profile-name: default
       - run:
           name: Authenticate Docker Client
-          command: >-
-            aws ecr get-login-password --region us-west-1 >> pass.txt
+          command: |
+            aws ecr get-login-password --region us-west-1 >> pass.txt;
             cat pass.txt
             # Retrieve an authentication token and authenticate your Docker client to your registry
             aws ecr get-login-password --region us-west-1 | docker login --username AWS --password-stdin 338101346306.dkr.ecr.us-west-1.amazonaws.com
