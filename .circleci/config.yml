@@ -91,7 +91,7 @@ workflows:
           #profile-name: myProfileName
           public-registry: false
           push-image: true
-          region: AWS_REGION
+          region: $AWS_REGION
           registry-id: AWS_ECR_REGISTRY_ID
           repo: nginx-blanco-schemes
           repo-scan-on-push: true
