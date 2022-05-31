@@ -46,14 +46,18 @@ jobs:
       - persist_to_workspace:
           root: react-app
           paths:
-            - code/build     
+            - code/build   
+      - run:
+          name: ls
+          command: ls  
       
 
 workflows:
   react-node-workflow: 
     jobs:
       - create-react-app-if-none
-      - run: ls
+      
+
       - aws-ecr/build-and-push-image:
           requires:
             - create-react-app-if-none
