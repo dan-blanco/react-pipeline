@@ -47,17 +47,12 @@ jobs:
           root: react-app
           paths:
             - code/build   
-      - run:
-          name: ls
-          command: ls  
       
 
 workflows:
   react-node-workflow: 
     jobs:
       - create-react-app-if-none
-      
-
       - aws-ecr/build-and-push-image:
           requires:
             - create-react-app-if-none
