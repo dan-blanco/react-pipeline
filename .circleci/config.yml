@@ -72,9 +72,6 @@ workflows:
   react-node-workflow: 
     jobs:
       - create-react-app-if-none
-      - build-react-app:
-          requires: 
-            - create-react-app-if-none
       - create-ecr-image:
           requires:
-            - build-react-app
+            - create-react-app-if-none
