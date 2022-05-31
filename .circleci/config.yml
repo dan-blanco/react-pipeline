@@ -61,7 +61,6 @@ jobs:
           #context: myContext
           create-repo: true
           dockerfile: Dockerfile
-          executor: aws-ecr/default
           extra-build-args: '--compress'
           #new-profile-name: newProfileName
           no-output-timeout: 20m
@@ -86,5 +85,5 @@ workflows:
     jobs:
       - create-react-app-if-none
       - send-react-image-ecr:
-          - requires:
-              create-react-app-if-none
+          requires:
+            - create-react-app-if-none
