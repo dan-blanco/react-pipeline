@@ -48,33 +48,12 @@ jobs:
           paths:
             - code/build     
       
-  create-ecr-image:
-    executor: aws-cli/default
-    steps:
-      - checkout
-      - aws-cli/setup:
-          profile-name: default
-      - run:
-          name: Authenticate Docker Client
-          command: |
-            aws ecr get-login-password --region us-west-1 >> pass.txt;
-            cat pass.txt
-            # Retrieve an authentication token and authenticate your Docker client to your registry
-            aws ecr get-login-password --region us-west-1 | docker login --username AWS --password-stdin 338101346306.dkr.ecr.us-west-1.amazonaws.com
-      - run:
-          name: build-tage-docker-image
-          command: |
-            docker build -t nginx-blanco-schemes .
-            docker tag nginx-blanco-schemes:latest 338101346306.dkr.ecr.us-west-1.amazonaws.com/nginx-blanco-schemes:latest
-      - run:
-          name: push-image-to-ecr
-          command: |
-            docker push 338101346306.dkr.ecr.us-west-1.amazonaws.com/nginx-blanco-schemes:latest 
 
 workflows:
   react-node-workflow: 
     jobs:
       - create-react-app-if-none
+      - run: ls
       - aws-ecr/build-and-push-image:
           requires:
             - create-react-app-if-none
