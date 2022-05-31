@@ -1,2 +1,2 @@
 FROM nginx:latest
-COPY code/build /usr/share/nginx/html
+COPY react-app/code/build /usr/share/nginx/html
