@@ -76,6 +76,8 @@ workflows:
     jobs:
       - create-react-app-if-none
       - aws-ecr/build-and-push-image:
+          requires:
+            - create-react-app-if-none
           aws-access-key-id: ACCESS_KEY_ID_ENV_VAR_NAME
           aws-cli-version: latest
           aws-secret-access-key: SECRET_ACCESS_KEY_ENV_VAR_NAME
@@ -86,7 +88,7 @@ workflows:
           extra-build-args: '--compress'
           #new-profile-name: newProfileName
           no-output-timeout: 20m
-          path: Dockerfile
+          #path: Dockerfile
           platform: linux/amd64
           #profile-name: myProfileName
           public-registry: false
